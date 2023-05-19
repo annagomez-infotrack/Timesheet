@@ -1,14 +1,13 @@
 import fetch from 'node-fetch';
 
-async function run() {
+export async function createTimeEntry(teamId='306973',startDateEpoch,msDuration,assigneeId=24627195,taskId ) {
 
  
   const query = new URLSearchParams({
     custom_task_ids: 'true',
-    team_id: '306973'
+    team_id: teamId
   }).toString();
 
-  const teamId = '306973';
   const resp = await fetch(
     `https://api.clickup.com/api/v2/team/${teamId}/time_entries?${query}`,
     {
@@ -21,16 +20,16 @@ async function run() {
         description: 'from api',
         tags: [
           {
-            name: 'name of tag',
+            name: 'timesheet_ag',
             tag_bg: '#BF55EC',
             tag_fg: '#FFFFFF'
           }
         ],
-        start: 1684330120000,
+        start: startDateEpoch,
         billable: false,
-        duration: 50000,
-        assignee: 24627195,
-        tid: '860qcfee5'
+        duration: msDuration,
+        assignee: assigneeId,
+        tid: taskId
       })
     }
   );
@@ -39,4 +38,4 @@ async function run() {
   console.log(data);
 }
 
-run();
+//run();
