@@ -12,11 +12,11 @@ async function getDate(daysSinceEpoch) {
 
 async function run() {
 
-const apiKey = ''//use your own apiKey go to: https://app.clickup.com/306973/settings/apps
-const assigneeId = 1 // use your own assigneeId go to: https://clickup.com/api/clickupreference/operation/GetAuthorizedUser/
-const teamId = '306973' //306973 is the global teamId
-const workSheetsFromFile = xlsx.parse(`timesheet.xlsx`);
-const dateFrom = new Date('2023-05-18')
+  const apiKey = ''//use your own apiKey go to: https://app.clickup.com/306973/settings/apps
+  const assigneeId = 1 // use your own assigneeId go to: https://clickup.com/api/clickupreference/operation/GetAuthorizedUser/
+  const teamId = '306973' //306973 is the global teamId
+  const workSheetsFromFile = xlsx.parse(`timesheet.xlsx`); //excel file for timesheet
+  const dateFrom = new Date('2023-05-18') //start date for creating timeentry so it won't duplicate timeentries
  const taskIds = {
   'Leave': "860q9j3k9",
   'PublicHolidays': "860q9j3kx",    
@@ -43,7 +43,7 @@ const dateFrom = new Date('2023-05-18')
       let dateEpoch = await getDate(dailyTime.Date)
       //console.log(dateEpoch)
       let date = new Date(dateEpoch)
-      // if Weekend
+      // if not Weekend and after datefrom
       if(!['Saturday', 'Sunday', 'Total'].includes(dailyTime.Day) && dailyTime.Day !== "" && date >= dateFrom){
        
         Object.entries(dailyTime).forEach(async function(entry){

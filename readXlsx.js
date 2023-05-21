@@ -12,7 +12,7 @@ async function getDate(daysSinceEpoch) {
 
 async function run() {
 
-const apiKey = 'pk_24627195_NZ8FYLF8IVVAK9MJQWYBACHFSU43PSMF' //use your own apiKey
+const apiKey = '' //use your own apiKey
 const assigneeId = 24627195 // use your own assigneeId
 const teamId = '306973' //306973 is the global teamId
 const dateFrom = new Date('2023-05-18')
