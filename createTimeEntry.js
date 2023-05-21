@@ -1,6 +1,8 @@
 import fetch from 'node-fetch';
 
-export async function createTimeEntry(teamId='306973',startDateEpoch,msDuration,assigneeId=24627195,taskId ) {
+// using this api: https://clickup.com/api/clickupreference/operation/Createatimeentry/
+
+export async function createTimeEntry(teamId='306973',startDateEpoch,msDuration,assigneeId=24627195,taskId, apikey ) {
 
  
   const query = new URLSearchParams({
@@ -14,13 +16,13 @@ export async function createTimeEntry(teamId='306973',startDateEpoch,msDuration,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: 'pk_24627195_NZ8FYLF8IVVAK9MJQWYBACHFSU43PSMF'
+        Authorization: apikey
       },
       body: JSON.stringify({
         description: 'from api',
         tags: [
           {
-            name: 'timesheet_ag',
+            name: 'timesheet',
             tag_bg: '#BF55EC',
             tag_fg: '#FFFFFF'
           }
