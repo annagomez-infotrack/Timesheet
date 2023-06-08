@@ -12,10 +12,11 @@ async function getDate(daysSinceEpoch) {
 
 async function run() {
 
-const apiKey = '' //use your own apiKey
+const apiKey = 'pk_24627195_NZ8FYLF8IVVAK9MJQWYBACHFSU43PSMF' //use your own apiKey
 const assigneeId = 24627195 // use your own assigneeId
 const teamId = '306973' //306973 is the global teamId
-const dateFrom = new Date('2023-05-18')
+const dateFrom = new Date('2023-05-03')
+const dateTo = new Date('2023-06-21')
 
 
 const workSheetsFromFile = xlsx.parse(`may2023.xlsx`);
@@ -46,14 +47,14 @@ const workSheetsFromFile = xlsx.parse(`may2023.xlsx`);
     //console.log(dateEpoch)
     let date = new Date(dateEpoch)
       // if Weekend
-    if(!['Saturday', 'Sunday', 'Total'].includes(dailyTime.Day) && dailyTime.Day !== "" && date >= dateFrom){
+    if(!['Saturday', 'Sunday', 'Total'].includes(dailyTime.Day) && dailyTime.Day !== "" && date >= dateFrom && date <= dateTo){
       
       Object.entries(dailyTime).forEach(async function(entry){
         const [key, value] = entry;
         if(value != undefined && !['Day','Date', 'TotalHours'].includes(key)){
           let duration=value*60*60*1000
           console.log(`Send:${key}=${value}`+`| startDateEpoch:${dateEpoch} | taskId:${taskIds[key]} | duration:${duration} | date:${date}`)
-          // await createTimeEntry(teamId,dateEpoch,duration,assigneeId,taskIds[key],apiKey)
+          await createTimeEntry(teamId,dateEpoch,duration,assigneeId,taskIds[key],apiKey)
         }
       });
     }
