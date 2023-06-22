@@ -4,7 +4,8 @@ import fetch from 'node-fetch';
 
 export async function createTimeEntry(teamId='306973',startDateEpoch,msDuration,assigneeId=24627195,taskId, apikey ) {
 
- 
+  const tag = new Date().toISOString();
+  console.log(tag);
   const query = new URLSearchParams({
     custom_task_ids: 'true',
     team_id: teamId
@@ -22,7 +23,7 @@ export async function createTimeEntry(teamId='306973',startDateEpoch,msDuration,
         description: 'from api',
         tags: [
           {
-            name: 'timesheet',
+            name: `timesheet_${tag}`,
             tag_bg: '#BF55EC',
             tag_fg: '#FFFFFF'
           }
